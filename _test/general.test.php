@@ -126,4 +126,30 @@ EOT;
 
 	$this->assertEquals($expected, $xhtml, 'A <colorswatch> tag with a color name gets rendered properly');
     }
+
+    /**
+     * Test that the <colorswatch> tag gets properly substituted
+     * if a color name with a non-ascii word letter is provided
+     */
+    public function test_substitution_with_a_non_ascii_name()
+    {
+    	$info = array();
+
+	$code = '#00FF00';
+	$name = 'grün';
+
+
+	$expected = <<<EOT
+
+<p>
+<div class="colorswatch"><div class="colorswatch_swatch" style="background-color: $code;">&nbsp;</div><div class="colorswatch_info">$name<br>($code)</div></div>
+</p>
+
+EOT;
+
+	$instructions = p_get_instructions('<colorswatch ' . $code . ':' . $name . '>');
+	$xhtml = p_render('xhtml', $instructions, $info);
+
+	$this->assertEquals($expected, $xhtml, 'A <colorswatch> tag with a non-ascii color name gets rendered properly');
+    }
 } // end of class

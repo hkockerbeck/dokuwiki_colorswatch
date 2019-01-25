@@ -47,7 +47,7 @@ class syntax_plugin_colorswatch_colorswatch extends DokuWiki_Syntax_Plugin
     public function connectTo($mode)
     {
         $this->Lexer->addSpecialPattern('<colorswatch #[0-9a-fA-F]{3,6}>', $mode, 'plugin_colorswatch_colorswatch');
-        $this->Lexer->addSpecialPattern('<colorswatch #[0-9a-fA-F]{3,6}:[a-zA-Z0-9-_ ]+>', $mode, 'plugin_colorswatch_colorswatch');
+        $this->Lexer->addSpecialPattern('<colorswatch #[0-9a-fA-F]{3,6}:[\p{Xwd}_ -]+>', $mode, 'plugin_colorswatch_colorswatch');
     }
 
     /**
@@ -64,7 +64,7 @@ class syntax_plugin_colorswatch_colorswatch extends DokuWiki_Syntax_Plugin
     {
         $data = array();
 
-	preg_match('/<colorswatch (#[0-9a-fA-F]{3,6})(:([a-zA-Z0-9-_ ]+))?>/', $match, $match_data);
+	preg_match('/<colorswatch (#[0-9a-fA-F]{3,6})(:([\p{Xwd}_ -]+))?>/', $match, $match_data);
 	$data['code'] = $match_data[1];
 	$data['name'] = $match_data[3];
 
