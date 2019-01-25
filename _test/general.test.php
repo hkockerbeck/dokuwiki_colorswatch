@@ -8,6 +8,8 @@
 class general_plugin_colorswatch_test extends DokuWikiTest
 {
 
+    protected $pluginsEnabled = array('colorswatch');
+
     /**
      * Simple test to make sure the plugin.info.txt is in correct format
      */
@@ -31,7 +33,7 @@ class general_plugin_colorswatch_test extends DokuWikiTest
         $this->assertTrue(mail_isvalid($info['email']));
         $this->assertRegExp('/^\d\d\d\d-\d\d-\d\d$/', $info['date']);
         $this->assertTrue(false !== strtotime($info['date']));
-    }
+    } // end of test_plugininfo()
 
     /**
      * Test to ensure that every conf['...'] entry in conf/default.php has a corresponding meta['...'] entry in
@@ -72,5 +74,29 @@ class general_plugin_colorswatch_test extends DokuWikiTest
             }
         }
 
+    } // end of test_plugin_conf()
+
+    /**
+     * Test that the <colorswatch> tag gets properly substituted
+     */
+    public function test_substitution()
+    {
+    	$info = array();
+
+	$code = '#FF00FF';
+
+
+	$expected = <<<EOT
+
+<p>
+<div class="colorswatch"><div class="colorswatch_swatch" style="background-color: $code;">&nbsp;</div><div class="colorswatch_info">$code</div></div>
+</p>
+
+EOT;
+
+	$instructions = p_get_instructions('<colorswatch ' . $code . '>');
+	$xhtml = p_render('xhtml', $instructions, $info);
+
+	$this->assertEquals($expected, $xhtml);
     }
-}
+} // end of class

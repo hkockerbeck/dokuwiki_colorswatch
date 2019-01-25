@@ -18,7 +18,7 @@ class syntax_plugin_colorswatch_colorswatch extends DokuWiki_Syntax_Plugin
      */
     public function getType()
     {
-        return 'FIXME: container|baseonly|formatting|substition|protected|disabled|paragraphs';
+        return 'substition';
     }
 
     /**
@@ -26,7 +26,7 @@ class syntax_plugin_colorswatch_colorswatch extends DokuWiki_Syntax_Plugin
      */
     public function getPType()
     {
-        return 'FIXME: normal|block|stack';
+        return 'normal';
     }
 
     /**
@@ -34,7 +34,9 @@ class syntax_plugin_colorswatch_colorswatch extends DokuWiki_Syntax_Plugin
      */
     public function getSort()
     {
-        return FIXME;
+    	// we don't really use this
+	// just use constant from code plugin
+        return 195;
     }
 
     /**
@@ -44,14 +46,8 @@ class syntax_plugin_colorswatch_colorswatch extends DokuWiki_Syntax_Plugin
      */
     public function connectTo($mode)
     {
-        $this->Lexer->addSpecialPattern('<FIXME>', $mode, 'plugin_colorswatch_colorswatch');
-//        $this->Lexer->addEntryPattern('<FIXME>', $mode, 'plugin_colorswatch_colorswatch');
+        $this->Lexer->addSpecialPattern('<colorswatch #[0-9a-fA-F]{3,6}>', $mode, 'plugin_colorswatch_colorswatch');
     }
-
-//    public function postConnect()
-//    {
-//        $this->Lexer->addExitPattern('</FIXME>', 'plugin_colorswatch_colorswatch');
-//    }
 
     /**
      * Handle matches of the colorswatch syntax
@@ -66,6 +62,9 @@ class syntax_plugin_colorswatch_colorswatch extends DokuWiki_Syntax_Plugin
     public function handle($match, $state, $pos, Doku_Handler $handler)
     {
         $data = array();
+
+	preg_match('/<colorswatch (#[0-9a-fA-F]{3,6})>/', $match, $match_data);
+	$data['code'] = $match_data[1];
 
         return $data;
     }
@@ -84,6 +83,12 @@ class syntax_plugin_colorswatch_colorswatch extends DokuWiki_Syntax_Plugin
         if ($mode !== 'xhtml') {
             return false;
         }
+
+	$code = $data['code'];
+
+	$renderer->doc .= <<<EOT
+<div class="colorswatch"><div class="colorswatch_swatch" style="background-color: $code;">&nbsp;</div><div class="colorswatch_info">$code</div></div>
+EOT;
 
         return true;
     }
