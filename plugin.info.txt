@@ -1,0 +1,7 @@
+base   colorswatch
+author Henning Kockerbeck
+email  henning.kockerbeck@isatis-online.de
+date   2019-01-25
+name   colorswatch plugin
+desc   Display a color swatch of the given color
+url    https://www.isatis-online.de
