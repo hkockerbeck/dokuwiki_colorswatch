@@ -47,6 +47,7 @@ class syntax_plugin_colorswatch_colorswatch extends DokuWiki_Syntax_Plugin
     public function connectTo($mode)
     {
         $this->Lexer->addSpecialPattern('<colorswatch #[0-9a-fA-F]{3,6}>', $mode, 'plugin_colorswatch_colorswatch');
+        $this->Lexer->addSpecialPattern('<colorswatch #[0-9a-fA-F]{3,6}:[a-zA-Z0-9-_ ]+>', $mode, 'plugin_colorswatch_colorswatch');
     }
 
     /**
@@ -63,8 +64,9 @@ class syntax_plugin_colorswatch_colorswatch extends DokuWiki_Syntax_Plugin
     {
         $data = array();
 
-	preg_match('/<colorswatch (#[0-9a-fA-F]{3,6})>/', $match, $match_data);
+	preg_match('/<colorswatch (#[0-9a-fA-F]{3,6})(:([a-zA-Z0-9-_ ]+))?>/', $match, $match_data);
 	$data['code'] = $match_data[1];
+	$data['name'] = $match_data[3];
 
         return $data;
     }
@@ -86,8 +88,18 @@ class syntax_plugin_colorswatch_colorswatch extends DokuWiki_Syntax_Plugin
 
 	$code = $data['code'];
 
+	if ($data['name'] != '') 
+	{
+	    $name = $data['name'] . '<br>(' . $code . ')';
+	}
+	else
+	{
+	    $name = $code . '<br>&nbsp;';
+	}
+
+
 	$renderer->doc .= <<<EOT
-<div class="colorswatch"><div class="colorswatch_swatch" style="background-color: $code;">&nbsp;</div><div class="colorswatch_info">$code</div></div>
+<div class="colorswatch"><div class="colorswatch_swatch" style="background-color: $code;">&nbsp;</div><div class="colorswatch_info">$name</div></div>
 EOT;
 
         return true;

@@ -78,8 +78,9 @@ class general_plugin_colorswatch_test extends DokuWikiTest
 
     /**
      * Test that the <colorswatch> tag gets properly substituted
+     * if no color name is provided
      */
-    public function test_substitution()
+    public function test_substitution_without_a_name()
     {
     	$info = array();
 
@@ -89,7 +90,7 @@ class general_plugin_colorswatch_test extends DokuWikiTest
 	$expected = <<<EOT
 
 <p>
-<div class="colorswatch"><div class="colorswatch_swatch" style="background-color: $code;">&nbsp;</div><div class="colorswatch_info">$code</div></div>
+<div class="colorswatch"><div class="colorswatch_swatch" style="background-color: $code;">&nbsp;</div><div class="colorswatch_info">$code<br>&nbsp;</div></div>
 </p>
 
 EOT;
@@ -97,6 +98,32 @@ EOT;
 	$instructions = p_get_instructions('<colorswatch ' . $code . '>');
 	$xhtml = p_render('xhtml', $instructions, $info);
 
-	$this->assertEquals($expected, $xhtml);
+	$this->assertEquals($expected, $xhtml, 'A <colorswatch> tag without a color name gets rendered properly');
+    }
+
+    /**
+     * Test that the <colorswatch> tag gets properly substituted
+     * if a color name is provided
+     */
+    public function test_substitution_with_a_name()
+    {
+    	$info = array();
+
+	$code = '#FF00FF';
+	$name = 'a name';
+
+
+	$expected = <<<EOT
+
+<p>
+<div class="colorswatch"><div class="colorswatch_swatch" style="background-color: $code;">&nbsp;</div><div class="colorswatch_info">$name<br>($code)</div></div>
+</p>
+
+EOT;
+
+	$instructions = p_get_instructions('<colorswatch ' . $code . ':' . $name . '>');
+	$xhtml = p_render('xhtml', $instructions, $info);
+
+	$this->assertEquals($expected, $xhtml, 'A <colorswatch> tag with a color name gets rendered properly');
     }
 } // end of class
