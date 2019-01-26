@@ -46,8 +46,21 @@ class syntax_plugin_colorswatch_colorswatch extends DokuWiki_Syntax_Plugin
      */
     public function connectTo($mode)
     {
-        $this->Lexer->addSpecialPattern('<colorswatch #[0-9a-fA-F]{3,6}>', $mode, 'plugin_colorswatch_colorswatch');
-        $this->Lexer->addSpecialPattern('<colorswatch #[0-9a-fA-F]{3,6}:[\p{Xwd}_ -]+>', $mode, 'plugin_colorswatch_colorswatch');
+    	# color codes #rrggbb
+        $this->Lexer->addSpecialPattern('<colorswatch #[0-9a-fA-F]{6}>', $mode, 'plugin_colorswatch_colorswatch');
+        $this->Lexer->addSpecialPattern('<colorswatch #[0-9a-fA-F]{6}:[\p{Xwd}_ -]+>', $mode, 'plugin_colorswatch_colorswatch');
+	
+    	# color codes #rrggbbaa
+        $this->Lexer->addSpecialPattern('<colorswatch #[0-9a-fA-F]{8}>', $mode, 'plugin_colorswatch_colorswatch');
+        $this->Lexer->addSpecialPattern('<colorswatch #[0-9a-fA-F]{8}:[\p{Xwd}_ -]+>', $mode, 'plugin_colorswatch_colorswatch');
+	
+    	# color codes #rgb
+        $this->Lexer->addSpecialPattern('<colorswatch #[0-9a-fA-F]{3}>', $mode, 'plugin_colorswatch_colorswatch');
+        $this->Lexer->addSpecialPattern('<colorswatch #[0-9a-fA-F]{3}:[\p{Xwd}_ -]+>', $mode, 'plugin_colorswatch_colorswatch');
+	
+    	# color codes #rgba
+        $this->Lexer->addSpecialPattern('<colorswatch #[0-9a-fA-F]{4}>', $mode, 'plugin_colorswatch_colorswatch');
+        $this->Lexer->addSpecialPattern('<colorswatch #[0-9a-fA-F]{4}:[\p{Xwd}_ -]+>', $mode, 'plugin_colorswatch_colorswatch');
     }
 
     /**
@@ -64,7 +77,7 @@ class syntax_plugin_colorswatch_colorswatch extends DokuWiki_Syntax_Plugin
     {
         $data = array();
 
-	preg_match('/<colorswatch (#[0-9a-fA-F]{3,6})(:([\p{Xwd}_ -]+))?>/', $match, $match_data);
+	preg_match('/<colorswatch (#[0-9a-fA-F]{3,8})(:([\p{Xwd}_ -]+))?>/', $match, $match_data);
 	$data['code'] = $match_data[1];
 	$data['name'] = $match_data[3];
 

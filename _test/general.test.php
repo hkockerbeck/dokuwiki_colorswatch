@@ -84,7 +84,7 @@ class general_plugin_colorswatch_test extends DokuWikiTest
     {
     	$info = array();
 
-	$codes = array('#FF00FF');
+	$codes = array('#FF00FF', '#ff00ff', '#FF00FFFF', '#FFF', '#FFF0');
 	$name = 'a name';
 
 	foreach($codes as $code)
@@ -109,7 +109,7 @@ class general_plugin_colorswatch_test extends DokuWikiTest
     {
     	$info = array();
 
-	$codes = array('invalid');
+	$codes = array('invalid', '#FXFF00', '#F', '#FF', '#FF0FF', '#FEFEFE0');
 	$name = 'a name';
 	
 	foreach($codes as $code)
