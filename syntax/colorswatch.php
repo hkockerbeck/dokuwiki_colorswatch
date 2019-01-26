@@ -77,9 +77,12 @@ class syntax_plugin_colorswatch_colorswatch extends DokuWiki_Syntax_Plugin
     {
         $data = array();
 
-	preg_match('/<colorswatch (#[0-9a-fA-F]{3,8})(:([\p{Xwd}_ -]+))?>/', $match, $match_data);
-	$data['code'] = $match_data[1];
-	$data['name'] = $match_data[3];
+	if ($state == DOKU_LEXER_SPECIAL)
+	{
+		preg_match('/<colorswatch (#[0-9a-fA-F]{3,8})(:([\p{Xwd}_ -]+))?>/', $match, $match_data);
+		$data['code'] = $match_data[1];
+		$data['name'] = $match_data[3];
+	}
 
         return $data;
     }
