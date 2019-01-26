@@ -80,52 +80,51 @@ class general_plugin_colorswatch_test extends DokuWikiTest
      * Test that the <colorswatch> tag gets properly substituted
      * if no color name is provided
      */
-    public function test_substitution_without_a_name()
+    public function test_substitution_with_valid_color_code()
     {
     	$info = array();
 
-	$code = '#FF00FF';
-
-
-	$expected = <<<EOT
-
-<p>
-<div class="colorswatch"><div class="colorswatch_swatch" style="background-color: $code;">&nbsp;</div><div class="colorswatch_info">$code<br>&nbsp;</div></div>
-</p>
-
-EOT;
-
-	$instructions = p_get_instructions('<colorswatch ' . $code . '>');
-	$xhtml = p_render('xhtml', $instructions, $info);
-
-	$this->assertEquals($expected, $xhtml, 'A <colorswatch> tag without a color name gets rendered properly');
-    }
-
-    /**
-     * Test that the <colorswatch> tag gets properly substituted
-     * if a color name is provided
-     */
-    public function test_substitution_with_a_name()
-    {
-    	$info = array();
-
-	$code = '#FF00FF';
+	$codes = array('#FF00FF');
 	$name = 'a name';
 
+	foreach($codes as $code)
+	{
+	  $expected = $this->correct_substitution_without_name($code);
+	  $instructions = p_get_instructions('<colorswatch ' . $code . '>');
+	  $xhtml = p_render('xhtml', $instructions, $info);
+	  $this->assertEquals($expected, $xhtml, 'A <colorswatch> tag with a valid code, but without a name gets rendered properly');
+	  
+	  $expected = $this->correct_substitution_with_name($code, $name);
+	  $instructions = p_get_instructions('<colorswatch ' . $code . ':' . $name . '>');
+	  $xhtml = p_render('xhtml', $instructions, $info);
+	  $this->assertEquals($expected, $xhtml, 'A <colorswatch> tag with a valid code and a name gets rendered properly');
+	}
+    } // end of test_substitution_with_valid_color_code()
 
-	$expected = <<<EOT
+    /**
+     * Test that the <colorswatch> tag is not substituted 
+     * if an invalid color code is provided
+     */
+    public function test_substitution_with_invalid_color_code()
+    {
+    	$info = array();
 
-<p>
-<div class="colorswatch"><div class="colorswatch_swatch" style="background-color: $code;">&nbsp;</div><div class="colorswatch_info">$name<br>($code)</div></div>
-</p>
-
-EOT;
-
-	$instructions = p_get_instructions('<colorswatch ' . $code . ':' . $name . '>');
-	$xhtml = p_render('xhtml', $instructions, $info);
-
-	$this->assertEquals($expected, $xhtml, 'A <colorswatch> tag with a color name gets rendered properly');
-    }
+	$codes = array('invalid');
+	$name = 'a name';
+	
+	foreach($codes as $code)
+	{
+	  $expected = $this->incorrect_substitution_without_name($code);
+	  $instructions = p_get_instructions('<colorswatch ' . $code . '>');
+	  $xhtml = p_render('xhtml', $instructions, $info);
+	  $this->assertEquals($expected, $xhtml, 'A <colorswatch> tag with an invalid code and without a name does\'t get rendered');
+  
+	  $expected = $this->incorrect_substitution_with_name($code, $name);
+	  $instructions = p_get_instructions('<colorswatch ' . $code . ':' . $name . '>');
+	  $xhtml = p_render('xhtml', $instructions, $info);
+	  $this->assertEquals($expected, $xhtml, 'A <colorswatch> tag with an invalid code and with a name does\'t get rendered');
+	}
+    } // end of test_substitution_with_invalid_color_code()
 
     /**
      * Test that the <colorswatch> tag gets properly substituted
@@ -138,18 +137,77 @@ EOT;
 	$code = '#00FF00';
 	$name = 'grün';
 
+	$expected = $this->correct_substitution_with_name($code, $name);
+	$instructions = p_get_instructions('<colorswatch ' . $code . ':' . $name . '>');
+	$xhtml = p_render('xhtml', $instructions, $info);
+	$this->assertEquals($expected, $xhtml, 'A <colorswatch> tag with a non-ascii color name gets rendered properly');
+    } // end of test_substition_with_a_non_ascii_name()
 
-	$expected = <<<EOT
+
+
+    /**
+     * Private helper functions
+     */
+
+
+
+    /**
+     * Returns the proper substitution for a valid <colorswatch> tag
+     * with a color name
+     */
+   private function correct_substitution_with_name($code, $name)
+   {
+     return <<<EOT
 
 <p>
 <div class="colorswatch"><div class="colorswatch_swatch" style="background-color: $code;">&nbsp;</div><div class="colorswatch_info">$name<br>($code)</div></div>
 </p>
 
 EOT;
+   } // end of correct_substitution_with_name()
 
-	$instructions = p_get_instructions('<colorswatch ' . $code . ':' . $name . '>');
-	$xhtml = p_render('xhtml', $instructions, $info);
+    /**
+     * Returns the proper substitution for a valid <colorswatch> tag
+     * with a color name
+     */
+   private function correct_substitution_without_name($code)
+   {
+     return <<<EOT
 
-	$this->assertEquals($expected, $xhtml, 'A <colorswatch> tag with a non-ascii color name gets rendered properly');
-    }
+<p>
+<div class="colorswatch"><div class="colorswatch_swatch" style="background-color: $code;">&nbsp;</div><div class="colorswatch_info">$code<br>&nbsp;</div></div>
+</p>
+
+EOT;
+   } // end of correct_substitution_with_name()
+
+   /**
+    * Returns the non-substituted tag for an invalid <colorswatch> tag
+    * with a name
+    */
+   private function incorrect_substitution_with_name($code, $name)
+   {
+     return <<<EOT
+
+<p>
+&lt;colorswatch $code:$name&gt;
+</p>
+
+EOT;
+   } // end of incorrect_substitution
+
+   /**
+    * Returns the non-substituted tag for an invalid <colorswatch> tag
+    * without a name
+    */
+   private function incorrect_substitution_without_name($code)
+   {
+     return <<<EOT
+
+<p>
+&lt;colorswatch $code&gt;
+</p>
+
+EOT;
+   } // end of incorrect_substitution
 } // end of class
