@@ -102,15 +102,15 @@ class syntax_plugin_colorswatch_colorswatch extends DokuWiki_Syntax_Plugin
             return false;
         }
 
-	$code = $data['code'];
+	$code = hsc($data['code']);
 
 	if ($data['name'] != '') 
 	{
-	    $name = $data['name'] . '<br>(' . $code . ')';
+	    $name = hsc($data['name']) . '<br>(' . hsc($code) . ')';
 	}
 	else
 	{
-	    $name = $code . '<br>&nbsp;';
+	    $name = hsc($code) . '<br>&nbsp;';
 	}
 
 
