@@ -1,6 +1,10 @@
 # colorswatch Plugin for DokuWiki
 
-Display a color swatch of the given color. A colorswatch can contain only a hexadecimal color code
+Display a color swatch of the given color.
+
+![Screenshot](docs/screenshot_dokuwiki_colorswatch.png?raw=true "Screenshot")
+
+A colorswatch can contain only a hexadecimal color code
     
     <colorswatch #FFFF00>
 
