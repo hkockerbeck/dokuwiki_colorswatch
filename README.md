@@ -7,6 +7,8 @@ Display a color swatch of the given color. A colorswatch can contain only a hexa
 or a color code and a name
 
     <colorswatch #FFFF00:some_yellow>
+    
+The plugin only supports hexadecimal color codes (the ones starting with ``#``), no functions like ``rgb()`` or ``hsla()`` or keywords like ``lightgray`` or ``fuchsia``. In the plugin's settings, it's possible to choose between small, middle sized and large color swatches. That setting is global, changes get applied the next time the wiki page with the color swatches in them is saved.
 
 All documentation for this plugin can be found at
 https://github.com/hkockerbeck/dokuwiki_colorswatch
