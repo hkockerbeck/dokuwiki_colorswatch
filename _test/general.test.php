@@ -157,10 +157,16 @@ class general_plugin_colorswatch_test extends DokuWikiTest
      */
    private function correct_substitution_with_name($code, $name)
    {
+     $conf_file = __DIR__ . '/../conf/default.php';
+     if (file_exists($conf_file)) {
+         include($conf_file);
+     }
+     $size_class = $conf['colorswatch_size'];
+
      return <<<EOT
 
 <p>
-<div class="colorswatch"><div class="colorswatch_swatch" style="background-color: $code;">&nbsp;</div><div class="colorswatch_info">$name<br>($code)</div></div>
+<div class="colorswatch $size_class"><div class="colorswatch_swatch" style="background-color: $code;">&nbsp;</div><div class="colorswatch_info">$name<br>($code)</div></div>
 </p>
 
 EOT;
@@ -172,10 +178,16 @@ EOT;
      */
    private function correct_substitution_without_name($code)
    {
+     $conf_file = __DIR__ . '/../conf/default.php';
+     if (file_exists($conf_file)) {
+         include($conf_file);
+     }
+     $size_class = $conf['colorswatch_size'];
+
      return <<<EOT
 
 <p>
-<div class="colorswatch"><div class="colorswatch_swatch" style="background-color: $code;">&nbsp;</div><div class="colorswatch_info">$code<br>&nbsp;</div></div>
+<div class="colorswatch $size_class"><div class="colorswatch_swatch" style="background-color: $code;">&nbsp;</div><div class="colorswatch_info">$code<br>&nbsp;</div></div>
 </p>
 
 EOT;

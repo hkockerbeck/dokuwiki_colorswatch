@@ -113,9 +113,11 @@ class syntax_plugin_colorswatch_colorswatch extends DokuWiki_Syntax_Plugin
 	    $name = hsc($code) . '<br>&nbsp;';
 	}
 
+	$size_class = $this->getConf('colorswatch_size');
+
 
 	$renderer->doc .= <<<EOT
-<div class="colorswatch"><div class="colorswatch_swatch" style="background-color: $code;">&nbsp;</div><div class="colorswatch_info">$name</div></div>
+<div class="colorswatch $size_class"><div class="colorswatch_swatch" style="background-color: $code;">&nbsp;</div><div class="colorswatch_info">$name</div></div>
 EOT;
 
         return true;

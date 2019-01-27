@@ -6,5 +6,5 @@
  */
 
 
-//$meta['fixme'] = array('string');
+$meta['colorswatch_size'] = array('multichoice', '_choices' => array('colorswatch_small', 'colorswatch_middle', 'colorswatch_large'));
 

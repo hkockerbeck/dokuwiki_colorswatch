@@ -5,5 +5,5 @@
  * @author Henning Kockerbeck <henning.kockerbeck@isatis-online.de>
  */
 
-//$conf['fixme']    = 'FIXME';
+$conf['colorswatch_size']    = 'colorswatch_middle';
 
