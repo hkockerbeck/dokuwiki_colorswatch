@@ -4,4 +4,4 @@ email  henning.kockerbeck@isatis-online.de
 date   2019-01-25
 name   Colorswatch
 desc   Display a color swatch of the given color
-url    https://www.isatis-online.de
+url    https://github.com/hkockerbeck/dokuwiki_colorswatch
