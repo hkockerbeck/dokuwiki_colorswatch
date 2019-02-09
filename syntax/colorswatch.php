@@ -106,15 +106,14 @@ class syntax_plugin_colorswatch_colorswatch extends DokuWiki_Syntax_Plugin
 
 	if ($data['name'] != '') 
 	{
-	    $name = hsc($data['name']) . '<br>(' . hsc($code) . ')';
+	    $name = hsc($data['name']);
 	}
 	else
 	{
-	    $name = hsc($code) . '<br>&nbsp;';
+	    $name = $code; // It's already escaped above.
 	}
 
 	$size_class = $this->getConf('colorswatch_size');
-
 
 	$renderer->doc .= <<<EOT
 <div class="colorswatch $size_class"><div class="colorswatch_swatch" style="background-color: $code;">&nbsp;</div><div class="colorswatch_info">$name</div></div>

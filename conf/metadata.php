@@ -6,5 +6,5 @@
  */
 
 
-$meta['colorswatch_size'] = array('multichoice', '_choices' => array('colorswatch_small', 'colorswatch_middle', 'colorswatch_large'));
+$meta['colorswatch_size'] = array('multichoice', '_choices' => array('colorswatch_tiny', 'colorswatch_small', 'colorswatch_middle', 'colorswatch_large'));
 

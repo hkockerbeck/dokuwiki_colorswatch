@@ -4,6 +4,11 @@
   margin: 0.3rem;
 }
 
+.colorswatch.colorswatch_tiny {
+  height: 1rem;
+  width: 2rem;
+}
+
 .colorswatch.colorswatch_small {
   height: 4rem;
   width: 6rem;
