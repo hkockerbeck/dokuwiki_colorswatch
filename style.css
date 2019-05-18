@@ -4,19 +4,24 @@
   margin: 0.3rem;
 }
 
+.colorswatch.colorswatch_tiny {
+  min-height: 1rem;
+  min-width: 2rem;
+}
+
 .colorswatch.colorswatch_small {
-  height: 4rem;
-  width: 6rem;
+  min-height: 4rem;
+  min-width: 6rem;
 }
 
 .colorswatch.colorswatch_middle {
-  height: 6rem;
-  width: 8rem;
+  min-height: 6rem;
+  min-width: 8rem;
 }
 
 .colorswatch.colorswatch_large {
-  height: 8rem;
-  width: 10rem;
+  min-height: 8rem;
+  min-width: 10rem;
 }
 
 .colorswatch .colorswatch_swatch {
@@ -30,5 +35,5 @@
   height: 34%;
   font-size: 85%;
   text-align: center;
-  padding: 0.3rem 0;
+  padding: 0.3rem 0 0;
 }
