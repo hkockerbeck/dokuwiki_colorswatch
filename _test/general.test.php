@@ -166,7 +166,7 @@ class general_plugin_colorswatch_test extends DokuWikiTest
      return <<<EOT
 
 <p>
-<div class="colorswatch $size_class"><div class="colorswatch_swatch" style="background-color: $code;">&nbsp;</div><div class="colorswatch_info">$name<br>($code)</div></div>
+<div class="colorswatch $size_class"><div class="colorswatch_swatch" style="background-color: $code;">&nbsp;</div><div class="colorswatch_info">$name</div></div>
 </p>
 
 EOT;
@@ -187,7 +187,7 @@ EOT;
      return <<<EOT
 
 <p>
-<div class="colorswatch $size_class"><div class="colorswatch_swatch" style="background-color: $code;">&nbsp;</div><div class="colorswatch_info">$code<br>&nbsp;</div></div>
+<div class="colorswatch $size_class"><div class="colorswatch_swatch" style="background-color: $code;">&nbsp;</div><div class="colorswatch_info">$code</div></div>
 </p>
 
 EOT;
@@ -206,7 +206,7 @@ EOT;
 </p>
 
 EOT;
-   } // end of incorrect_substitution
+   } // end of incorrect_substitution_with_name()
 
    /**
     * Returns the non-substituted tag for an invalid <colorswatch> tag
@@ -221,5 +221,5 @@ EOT;
 </p>
 
 EOT;
-   } // end of incorrect_substitution
+   } // end of incorrect_substitution_without_name()
 } // end of class
