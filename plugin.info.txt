@@ -1,7 +1,7 @@
 base   colorswatch
 author Henning Kockerbeck
 email  henning.kockerbeck@isatis-online.de
-date   2019-01-25
+date   2019-05-19
 name   Colorswatch
 desc   Display a color swatch of the given color
 url    https://github.com/hkockerbeck/dokuwiki_colorswatch
