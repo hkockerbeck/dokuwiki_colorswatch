@@ -2,42 +2,54 @@
   display: inline-block;
   vertical-align: top;
   margin: 0.3rem;
+
+  /* sizes etc. as CSS variables */
+  --tiny-height: 1;
+  --tiny-width: 2;
+  --small-height: 4;
+  --small-width: 6;
+  --middle-height: 6;
+  --middle-width: 8;
+  --large-height: 8;
+  --large-width: 10;
+
+  --ratio: 0.66;
 }
 
 .colorswatch.colorswatch_tiny {
-  min-height: 1rem;
-  min-width: 2rem;
+  min-height: calc(var(--tiny-height) * 1rem);
+  min-width: calc(var(--tiny-width) * 1rem);
 }
 
 .colorswatch.colorswatch_tiny .colorswatch_swatch {
-  height: calc(0.66*1rem);
+  height: calc(var(--ratio) * var(--tiny-height) * 1rem);
 }
 
 .colorswatch.colorswatch_small {
-  min-height: 4rem;
-  min-width: 6rem;
+  min-height: calc(var(--small-height) * 1rem);
+  min-width: calc(var(--small-width) * 1rem);
 }
 
 .colorswatch.colorswatch_small .colorswatch_swatch {
-  height: calc(0.66*4rem);
+  height: calc(var(--ratio) * var(--small-height) * 1rem);
 }
 
 .colorswatch.colorswatch_middle {
-  min-height: 6rem;
-  min-width: 8rem;
+  min-height: calc(var(--middle-height) * 1rem);
+  min-width: calc(var(--middle-width) * 1rem);
 }
 
 .colorswatch.colorswatch_middle .colorswatch_swatch {
-  height: calc(0.66*8rem);
+  height: calc(var(--ratio) * var(--middle-height) * 1rem);
 }
 
 .colorswatch.colorswatch_large {
-  min-height: 8rem;
-  min-width: 10rem;
+  min-height: calc(var(--large-height) * 1rem);
+  min-width: calc(var(--large-width) * 1rem);
 }
 
 .colorswatch.colorswatch_large .colorswatch_swatch {
-  height: calc(0.66*8rem);
+  height: calc(var(--ratio) * var(--large-height) * 1rem);
 }
 
 .colorswatch .colorswatch_swatch {
