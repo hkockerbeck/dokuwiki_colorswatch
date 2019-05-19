@@ -9,9 +9,17 @@
   min-width: 2rem;
 }
 
+.colorswatch.colorswatch_tiny .colorswatch_swatch {
+  height: calc(0.66*1rem);
+}
+
 .colorswatch.colorswatch_small {
   min-height: 4rem;
   min-width: 6rem;
+}
+
+.colorswatch.colorswatch_small .colorswatch_swatch {
+  height: calc(0.66*4rem);
 }
 
 .colorswatch.colorswatch_middle {
@@ -19,14 +27,21 @@
   min-width: 8rem;
 }
 
+.colorswatch.colorswatch_middle .colorswatch_swatch {
+  height: calc(0.66*8rem);
+}
+
 .colorswatch.colorswatch_large {
   min-height: 8rem;
   min-width: 10rem;
 }
 
+.colorswatch.colorswatch_large .colorswatch_swatch {
+  height: calc(0.66*8rem);
+}
+
 .colorswatch .colorswatch_swatch {
   width: 100%;
-  height: 66%;
   border-radius: 0.3rem;
 }
 
